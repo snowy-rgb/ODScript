@@ -22,29 +22,49 @@ function interpretODS(code) {
         if (line.startsWith(":: print ")) {
             let content = line.replace(":: print ", "").trim();
 
-            // ".." 뒤에 추가 코드가 들어가면 제거
+            // ".." 이후에 문자가 있으면 오류 발생
             if (content.includes(" ..")) {
-                content = content.split(" ..")[0];
+                let parts = content.split(" ..");
+                if (parts.length > 2 || parts[1].trim() !== "") {
+                    output += "오류: '..' 뒤에 불필요한 문자가 있습니다.\n";
+                    continue;
+                }
+                content = parts[0].trim();
+            } else {
+                output += "오류: '..'이 필요합니다.\n";
+                continue;
             }
 
-            // 변수 처리 - {} 안의 변수를 실제 값으로 변환
-            content = content.replace(/\{(\w+)\}/g, (match, varName) => {
-                return odsVariables[varName] !== undefined ? odsVariables[varName] : `{${varName}}`;
+            let resultText = "";
+
+            // 따옴표 기준으로 분리하여 {} 변수 처리
+            let parts = content.split(/("[^"]*")/g).filter(Boolean); // 따옴표 유지하며 분리
+            parts.forEach(part => {
+                if (part.startsWith('"') && part.endsWith('"')) {
+                    // 따옴표로 감싸진 문자열은 그대로 출력
+                    resultText += part.slice(1, -1);
+                } else {
+                    // {} 감싸진 변수 치환
+                    part = part.replace(/\{(\w+)\}/g, (match, varName) => {
+                        return odsVariables[varName] !== undefined ? odsVariables[varName] : `{${varName}}`;
+                    });
+                    resultText += part;
+                }
             });
 
-            // "" 내부 내용만 출력
-            let match = content.match(/^"(.*)"$/);
-            if (match) {
-                output += match[1] + "\n";
-            } else {
-                output += "오류: 올바른 문자열 형식이 아닙니다.\n";
-            }
+            output += resultText + "\n";
         }
         else if (line.startsWith(":: let ")) {
-            let parts = line.replace(":: let ", "").replace(" ..", "").split(" = ");
-            if (parts.length === 2) {
-                let varName = parts[0].trim();
-                let varValue = parts[1].trim();
+            let parts = line.replace(":: let ", "").split(" ..");
+            if (parts.length !== 2 || parts[1].trim() !== "") {
+                output += "오류: '..' 뒤에 불필요한 문자가 있습니다.\n";
+                continue;
+            }
+
+            let varAssignment = parts[0].split(" = ");
+            if (varAssignment.length === 2) {
+                let varName = varAssignment[0].trim();
+                let varValue = varAssignment[1].trim();
                 odsVariables[varName] = varValue;
             } else {
                 output += "오류: 변수 선언 형식이 잘못되었습니다.\n";
@@ -57,3 +77,4 @@ function interpretODS(code) {
 
     return output;
 }
+
