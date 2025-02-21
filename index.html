@@ -3,21 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OpalDataScript Editor</title>
-    <style>
-        body { font-family: Arial, sans-serif; text-align: center; }
-        textarea { width: 80%; height: 200px; font-size: 16px; }
-        button { margin-top: 10px; padding: 10px 20px; font-size: 16px; }
-        pre { background: #f4f4f4; padding: 10px; border-radius: 5px; }
-    </style>
+    <title>ODS Script 실행기</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>OpalDataScript 실행기</h1>
-    <textarea id="code" placeholder="여기에 ODS 코드를 입력하세요"></textarea><br>
-    <button onclick="runODS()">실행</button>
-    <h2>출력 결과</h2>
-    <pre id="output"></pre>
+    <header>
+        <h1>ODS Script 실행기</h1>
+        <div class="top-buttons">
+            <button id="example-code">예제 코드</button>
+            <button id="usage">사용법</button>
+            <button id="github"><img src="github-icon.png" alt="GitHub"></button>
+        </div>
+    </header>
 
-    <script src="ods_interpreter.js"></script> <!-- 나중에 JS 파일 추가 -->
+    <main>
+        <div class="editor-container">
+            <textarea id="code-editor" placeholder="여기에 ODS 코드를 입력하세요"></textarea>
+            <div class="input-area">
+                <h3>입력</h3>
+                <textarea id="input-box" placeholder="코드 실행 시 입력값을 작성하세요"></textarea>
+            </div>
+        </div>
+
+        <div class="terminal-container">
+            <h3>출력</h3>
+            <pre id="terminal-output">실행 결과가 여기에 표시됩니다...</pre>
+        </div>
+
+        <button id="run-button">RUN</button>
+    </main>
+
+    <script src="script.js"></script>
 </body>
 </html>
