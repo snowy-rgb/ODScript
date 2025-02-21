@@ -1,4 +1,4 @@
-import { handleCommand } from "./commands.js";
+import { handleCommand } from "commands.js";
 
 document.getElementById("run-button").addEventListener("click", function () {
     let code = document.getElementById("code-editor").value;
@@ -21,14 +21,20 @@ function interpretODS(code) {
     let lines = code.split("\n");
     let output = "";
     let jsCode = "";
+    let isInsideIfBlock = false; // if문 내부인지 확인
 
     for (let line of lines) {
         line = line.trim();
 
         // 명령어 핸들러로 처리
-        let result = handleCommand(line, odsVariables);
+        let result = handleCommand(line, odsVariables, isInsideIfBlock);
         output += result.output;
         jsCode += result.jsCode;
+
+        // if 문이 끝났는지 확인
+        if (line === "..") {
+            isInsideIfBlock = false;
+        }
     }
 
     return { result: output, jsCode: jsCode };
