@@ -74,6 +74,7 @@ function interpretODS(code) {
     return output;
 }
 
+
 // 코드 입력 시 줄 번호 업데이트
 const codeEditor = document.getElementById("code-editor");
 const lineNumbers = document.getElementById("line-numbers");
@@ -88,9 +89,11 @@ function updateLineNumbers() {
         lineNumberHTML += i + "<br>";
     }
     lineNumbers.innerHTML = lineNumberHTML;
+
+    // 줄 번호 높이 동기화
+    lineNumbers.style.height = codeEditor.scrollHeight + "px";
 }
 
 function syncScroll() {
     lineNumbers.scrollTop = codeEditor.scrollTop;
 }
-
