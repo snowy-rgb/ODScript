@@ -1,3 +1,5 @@
+import { handleCommand } from "./commands.js";
+
 document.getElementById("run-button").addEventListener("click", function () {
     let code = document.getElementById("code-editor").value;
     let outputArea = document.getElementById("terminal-output");
