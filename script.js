@@ -73,3 +73,24 @@ function interpretODS(code) {
 
     return output;
 }
+
+// 코드 입력 시 줄 번호 업데이트
+const codeEditor = document.getElementById("code-editor");
+const lineNumbers = document.getElementById("line-numbers");
+
+codeEditor.addEventListener("input", updateLineNumbers);
+codeEditor.addEventListener("scroll", syncScroll);
+
+function updateLineNumbers() {
+    const lines = codeEditor.value.split("\n").length;
+    let lineNumberHTML = "";
+    for (let i = 1; i <= lines; i++) {
+        lineNumberHTML += i + "<br>";
+    }
+    lineNumbers.innerHTML = lineNumberHTML;
+}
+
+function syncScroll() {
+    lineNumbers.scrollTop = codeEditor.scrollTop;
+}
+
