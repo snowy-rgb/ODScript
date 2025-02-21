@@ -97,3 +97,4 @@ function updateLineNumbers() {
 function syncScroll() {
     lineNumbers.scrollTop = codeEditor.scrollTop;
 }
+
