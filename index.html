@@ -3,10 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ODS Script</title>
+    <title>OpalDataScript Editor</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        textarea { width: 80%; height: 200px; font-size: 16px; }
+        button { margin-top: 10px; padding: 10px 20px; font-size: 16px; }
+        pre { background: #f4f4f4; padding: 10px; border-radius: 5px; }
+    </style>
 </head>
 <body>
-    <h1>Welcome to ODS Script!</h1>
-    <p>이 페이지에서 ODS 스크립트를 테스트할 수 있습니다.</p>
+    <h1>OpalDataScript 실행기</h1>
+    <textarea id="code" placeholder="여기에 ODS 코드를 입력하세요"></textarea><br>
+    <button onclick="runODS()">실행</button>
+    <h2>출력 결과</h2>
+    <pre id="output"></pre>
+
+    <script src="ods_interpreter.js"></script> <!-- 나중에 JS 파일 추가 -->
 </body>
 </html>
