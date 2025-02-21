@@ -1,0 +1,78 @@
+/* 전체 스타일 */
+body {
+    font-family: 'JetBrains Mono', monospace;
+    background-color: #1e1e1e;
+    color: white;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+/* 헤더 */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #252526;
+    padding: 15px;
+    border-bottom: 2px solid #3c3c3c;
+}
+
+h1 {
+    font-size: 24px;
+    margin: 0;
+}
+
+/* 버튼 스타일 */
+button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* 에디터 및 입력 창 */
+.editor-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+textarea {
+    width: 48%;
+    height: 200px;
+    font-size: 16px;
+    background-color: #2e2e2e;
+    color: white;
+    border: 1px solid #555;
+    padding: 10px;
+    border-radius: 5px;
+    resize: none;
+}
+
+/* 터미널 스타일 */
+.terminal-container {
+    margin-top: 20px;
+    background-color: black;
+    color: #00ff00;
+    padding: 15px;
+    border-radius: 5px;
+    height: 150px;
+    overflow-y: auto;
+}
+
+/* 실행 버튼 */
+#run-button {
+    display: block;
+    width: 150px;
+    margin: 20px auto;
+    font-size: 18px;
+}
